@@ -21,9 +21,9 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install base system
 ARG BUILD_ARCH=amd64
 RUN \
-    apt update \
+    apt-get update \
     \
-    && apt install -y --no-install-recommends \
+    && apt-get install -y --no-install-recommends \
         bash=5.1-2+b3 \
         ca-certificates=20210119 \
         curl=7.74.0-1.3+b1 \
