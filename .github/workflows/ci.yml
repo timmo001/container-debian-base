@@ -32,8 +32,6 @@ jobs:
         uses: ludeeus/action-shellcheck@2.0.0
         env:
           SHELLCHECK_OPTS: -s bash
-  lint-yamllint:
-    uses: timmo001/workflows/.github/workflows/lint-yamllint.yml@master
   build:
     name: Build ${{ matrix.architecture }}
     needs:
@@ -42,7 +40,6 @@ jobs:
       - lint-markdownlint
       - lint-prettier
       - lint-shellcheck
-      - lint-yamllint
     runs-on: ubuntu-latest
     strategy:
       matrix:
