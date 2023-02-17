@@ -37,9 +37,9 @@ jobs:
   build:
     name: Build ${{ matrix.architecture }}
     needs:
-      # - lint-hadolint
-      - lint-json
-      - lint-markdown
+      - lint-jsonlint
+      - lint-markdown-links
+      - lint-markdownlint
       - lint-prettier
       - lint-shellcheck
       - lint-yamllint
