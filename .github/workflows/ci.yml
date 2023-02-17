@@ -14,46 +14,14 @@ on:
   workflow_dispatch:
 
 jobs:
-  # lint-hadolint:
-  #   name: Hadolint
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: ⤵️ Check out code from GitHub
-  #       uses: actions/checkout@v3
-  #     - name: 🚀 Run Hadolint
-  #       uses: brpaz/hadolint-action@v1.5.0
-  #       with:
-  #         dockerfile: "./Dockerfile"
-  lint-json:
-    name: JSON Lint
-    runs-on: ubuntu-latest
-    steps:
-      - name: ⤵️ Check out code from GitHub
-        uses: actions/checkout@v3
-      - name: 🚀 Run JQ
-        run: |
-          shopt -s globstar
-          cat **/*.json | jq '.'
-  lint-markdown:
-    name: MarkdownLint
-    runs-on: ubuntu-latest
-    steps:
-      - name: ⤵️ Check out code from GitHub
-        uses: actions/checkout@v3
-      - name: 🚀 Run mdl
-        uses: actionshub/markdownlint@v3.1.3
+  lint-jsonlint:
+    uses: timmo001/workflows/.github/workflows/lint-jsonlint.yml@master
+  lint-markdown-links:
+    uses: timmo001/workflows/.github/workflows/lint-markdown-links.yml@master
+  lint-markdownlint:
+    uses: timmo001/workflows/.github/workflows/lint-markdownlint.yml@master
   lint-prettier:
-    name: Prettier
-    runs-on: ubuntu-latest
-    steps:
-      - name: ⤵️ Check out code from GitHub
-        uses: actions/checkout@v3
-      - name: 🚀 Run Prettier
-        uses: creyD/prettier_action@v4.2
-        with:
-          prettier_options: --write **/*.{json,js,md,yaml}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    uses: timmo001/workflows/.github/workflows/lint-prettier.yml@master
   lint-shellcheck:
     name: Shellcheck
     runs-on: ubuntu-latest
@@ -65,13 +33,7 @@ jobs:
         env:
           SHELLCHECK_OPTS: -s bash
   lint-yamllint:
-    name: YAMLLint
-    runs-on: ubuntu-latest
-    steps:
-      - name: ⤵️ Check out code from GitHub
-        uses: actions/checkout@v3
-      - name: 🚀 Run YAMLLint
-        uses: frenck/action-yamllint@v1.4
+    uses: timmo001/workflows/.github/workflows/lint-yamllint.yml@master
   build:
     name: Build ${{ matrix.architecture }}
     needs:
